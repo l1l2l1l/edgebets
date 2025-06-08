@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NBA Player Stats</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #00bcd4;
+    }
+    .player-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .card {
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .card h2 {
+      margin-top: 0;
+    }
+    .injured {
+      color: #ff5722;
+      font-weight: bold;
+    }
+    .healthy {
+      color: #4caf50;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>NBA Player Stats</h1>
+  <div class="player-container" id="playerContainer"></div>
+
+  <script>
+    const players = [
+      {
+        name: "Jayson Tatum",
+        team: "BOS",
+        position: "SF",
+        lastGameStats: { points: 28, rebounds: 9, assists: 5 },
+        lastFiveAvg: { points: 26.4, rebounds: 7.2, assists: 4.1 },
+        injured: false,
+        notes: "Facing weak perimeter defense",
+        nextOpponent: "MIA",
+        location: "Home",
+        prediction: "Expected to score around 27 PTS with 8 REB and 4 AST against Miami based on trends."
+      },
+      {
+        name: "LeBron James",
+        team: "LAL",
+        position: "SF",
+        lastGameStats: { points: 32, rebounds: 7, assists: 8 },
+        lastFiveAvg: { points: 29.1, rebounds: 6.5, assists: 7.2 },
+        injured: true,
+        notes: "Day-to-day with knee soreness",
+        nextOpponent: "GSW",
+        location: "Away",
+        prediction: "If active, predicted to have 30 PTS, 6 REB, 8 AST based on matchup vs Golden State."
+      }
+    ];
+
+    const container = document.getElementById("playerContainer");
+
+    players.forEach(player => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h2>${player.name} (${player.team})</h2>
+        <p><strong>Position:</strong> ${player.position}</p>
+        <p><strong>Last Game:</strong> ${player.lastGameStats.points} PTS, ${player.lastGameStats.rebounds} REB, ${player.lastGameStats.assists} AST</p>
+        <p><strong>Last 5 Games Avg:</strong> ${player.lastFiveAvg.points} PTS, ${player.lastFiveAvg.rebounds} REB, ${player.lastFiveAvg.assists} AST</p>
+        <p class="${player.injured ? 'injured' : 'healthy'}">
+          ${player.injured ? 'Injured' : 'Healthy'}
+        </p>
+        <p><strong>Notes:</strong> ${player.notes}</p>
+        <p><strong>Next Opponent:</strong> ${player.nextOpponent} (${player.location})</p>
+        <p><strong>Next Game Prediction:</strong> ${player.prediction}</p>
+      `;
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
